@@ -70,7 +70,13 @@ repeat task.wait() until (game:IsLoaded() and LocalPlayer:GetAttribute("IsLoaded
 
 local Portrait = LocalPlayer.PlayerGui.HUDGui.HUD.HealthGUI.Class
 Portrait:GetPropertyChangedSignal("Image"):Connect(function()
+    local Disguised = LocalPlayer.Character:FindFirstChild("Disguised")
+    if Disguised then
+        Portrait.Image = Icons[Disguised:GetAttribute("Team") .. "_" .. Disguised:GetAttribute("Class")]
+        return
+    end
     if Icons[LocalPlayer.Status.Team.Value .. "_" .. LocalPlayer.Status.Class.Value] then
         Portrait.Image = Icons[LocalPlayer.Status.Team.Value .. "_" .. LocalPlayer.Status.Class.Value]
     end
 end)
+
