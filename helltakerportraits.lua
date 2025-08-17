@@ -65,6 +65,9 @@ local Icons = {
 }
 
 local LocalPlayer = cloneref(game:GetService("Players")).LocalPlayer
+
+repeat task.wait() until (game:IsLoaded() and LocalPlayer:GetAttribute("IsLoaded")) -- Waiting until the game is fully loaded to avoid errors
+
 local Portrait = LocalPlayer.PlayerGui.HUDGui.HUD.HealthGUI.Class
 Portrait:GetPropertyChangedSignal("Image"):Connect(function()
     if Icons[LocalPlayer.Status.Team.Value .. "_" .. LocalPlayer.Status.Class.Value] then
